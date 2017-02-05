@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="container">
+      <div id="page-wrapper">
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1 class="page-header">Admin Page</h1>
+              </div>
+              <!-- /.col-lg-12 -->
+          </div>
+          <!-- /.row -->
+          <div class="row">
+            <form id="body" action="/register" method="post" enctype="multipart/form-data">
+              <div class="col-lg-12" style="width:650px">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          Store Info
+                      </div>
+                      <div class="panel-body">
+                          <!--<div class="row">-->
+
+                              <div style="width:100%">
+                                    <div class="form-group">
+                                      <label>Store List</label>
+                                      <select class="form-control" id="store_id" name="store_id" onchange="change()">
+                                        <% JSON.parse(store).forEach(function(item) { %>
+                                            <option><%= item.id %></option>
+                                        <% }); %>
+                                      </select>
+                                    </div>
+                                    <div class="form-group">
+                                          <label>Store Detail Info</label>
+                                          <input class="form-control" id="store_name" type='text' name="store_name">
+                                          <input class="form-control" id="phone" name="phone">
+                                          <input class="form-control" id="city" name="city">
+                                          <input class="form-control" id="goo" name="goo">
+                                          <input class="form-control" id="dong" name="dong">
+                                          <input class="form-control" id="lat" name="lat">
+                                          <input class="form-control" id="lng" name="lng">
+                                          <input class="form-control" id="img" name="img">
+                                          <input class="form-control" id="etc" name="etc">
+                                    </div>
+                              </div>
+                          <!--</div>-->
+                          <!-- /.row (nested) -->
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                  <!-- /.panel -->
+              </div>
+                <div style="text-align:right;margin-right:70px;">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+              <!-- /.col-lg-12 -->
+          </div>
+          <!-- /.row -->
+      </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+  var store_data = [];
+  <% JSON.parse(store).forEach(function(item) { %>
+    var temp = {
+      store_name : "<%= item.store_name%>",
+      phone : "<%= item.phone%>",
+      city : "<%= item.city%>",
+      goo : "<%= item.goo%>",
+      dong : "<%= item.dong%>",
+      lat : "<%= item.lat%>",
+      lng : "<%= item.lng%>",
+      img : "<%= item.img%>",
+      etc : "<%= item.etc%>"
+    };
+    store_data.push(temp);
+  <% }); %>
+
+  document.getElementById("store_name").value = store_data[0].store_name;
+  document.getElementById("phone").value = store_data[0].phone;
+  document.getElementById("city").value = store_data[0].city;
+  document.getElementById("goo").value = store_data[0].goo;
+  document.getElementById("dong").value = store_data[0].dong;
+  document.getElementById("lat").value = store_data[0].lat;
+  document.getElementById("lng").value = store_data[0].lng;
+  document.getElementById("img").value = store_data[0].img;
+  document.getElementById("etc").value = store_data[0].etc;
+
+  function change() {
+    var len = store_data.length;
+    var id = parseInt(document.getElementById("store_id").value) - 1 ;
+
+    document.getElementById("store_name").value = store_data[id].store_name;
+    document.getElementById("phone").value = store_data[id].phone;
+    document.getElementById("city").value = store_data[id].city;
+    document.getElementById("goo").value = store_data[id].goo;
+    document.getElementById("dong").value = store_data[id].dong;
+    document.getElementById("lat").value = store_data[id].lat;
+    document.getElementById("lng").value = store_data[id].lng;
+    document.getElementById("img").value = store_data[id].img;
+    document.getElementById("etc").value = store_data[id].etc;
+
+  }
+</script>
